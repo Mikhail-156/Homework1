@@ -32,3 +32,17 @@ def get_date(my_date: str) -> str:
     """Функция смены вормата даты и вреня"""
     date_obj = datetime.strptime(my_date[:10], "%Y-%m-%d")
     return f"{date_obj.day:02}:{date_obj.month:02}:{date_obj.year}"
+
+
+def filter_by_state(bank_transaction: list[dict], state: str = "EXECUTED") -> list:
+    """Функция возврата словарей банковских операций по ключу"""
+    state_bank_transaction = []
+    for item in bank_transaction:
+        if item["state"] == state:
+            state_bank_transaction.append(item)
+    return state_bank_transaction
+
+
+def sort_by_date(data_logs: list[dict], reverse: bool = True) -> list:
+    """Функция сортировке банковских операций по дате"""
+    return sorted(data_logs, key=lambda x: x["date"], reverse=reverse)
