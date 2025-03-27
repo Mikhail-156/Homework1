@@ -15,7 +15,7 @@ def get_mask_card_number(card_number: Union[int, str]) -> Union[str]:
 def get_mask_account(account_number: Union[int, str]) -> Union[str]:
     """Функция которя скрывает номет счета"""
     if len(str(account_number)) == 0:
-        return "Введите номер счета"
+        return "Введите номер Счета"
     elif len(str(account_number)) != 20:
         return "Номер должин состоять из 20 цифр"
     elif account_number.isdigit():
