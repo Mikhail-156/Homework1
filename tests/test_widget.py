@@ -1,6 +1,7 @@
 import pytest
 
-from src.widget import mask_account_card, get_date
+from src.widget import get_date, mask_account_card
+
 
 @pytest.mark.parametrize("name_for_mask, expected_resilt", [
     ("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),

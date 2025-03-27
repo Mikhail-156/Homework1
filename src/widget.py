@@ -17,6 +17,7 @@ def mask_account_card(name_for_mask: str) -> str:
             return f"{list_[0]} {get_mask_card_number(list_[1])}"
     return "Введите данные"
 
+
 def get_date(my_date: str) -> str:
     """Функция смены вормата даты и вреня"""
     try:

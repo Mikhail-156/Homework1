@@ -21,4 +21,3 @@ def get_mask_account(account_number: Union[int, str]) -> Union[str]:
     elif account_number.isdigit():
         return f"**{str(account_number)[-4:]}"
     return "Номер должин содержать только цифры"
-
