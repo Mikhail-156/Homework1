@@ -2,7 +2,10 @@ from typing import Union
 
 
 def get_mask_card_number(card_number: Union[int, str]) -> Union[str]:
-    """Функция которя скрывает номет катры"""
+    """
+    Функция принимает на вход номер карты и возвращает его маску
+    в формате XXXX XX** **** XXXX, где X - это цифры
+    """
     if len(str(card_number)) == 0:
         return "Введите номер карты"
     elif len(str(card_number)) != 16:
@@ -13,7 +16,9 @@ def get_mask_card_number(card_number: Union[int, str]) -> Union[str]:
 
 
 def get_mask_account(account_number: Union[int, str]) -> Union[str]:
-    """Функция которя скрывает номет счета"""
+    """Функция принимает на вход номер счета и возвращает его маску в формате **XXXX,
+    где X - это цифры
+    """
     if len(str(account_number)) == 0:
         return "Введите номер Счета"
     elif len(str(account_number)) != 20:
