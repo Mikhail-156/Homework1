@@ -1,9 +1,11 @@
 import time
 
+
 def log(filename=None):
+    """Декоратор, который автоматически логирует начало и конец выполнения функции
+    а также ее результаты или возникшие ошибки"""
     def my_decorator(func):
         def inner(*args, **kwargs):
-
             try:
                 print(args)
                 result = func(*args, **kwargs)
@@ -17,7 +19,6 @@ def log(filename=None):
                         log_file.write(message)
                 else:
                     print(message)
-
             return result
         return inner
     return my_decorator
@@ -26,5 +27,6 @@ def log(filename=None):
 @log("log.txt")
 def _summ(a, b):
     print(a + b)
+
 
 _summ(5, 12)
