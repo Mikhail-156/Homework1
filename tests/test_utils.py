@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import mock_open, patch
-
 from src.external_api import convert_to_rub
 from src.utils import load_transactions
 

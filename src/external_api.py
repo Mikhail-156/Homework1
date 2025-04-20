@@ -2,26 +2,26 @@ import os
 import requests
 from dotenv import load_dotenv
 
-load_dotenv('.env')  # Загружаем переменные окружения из .env файла
+
+load_dotenv('.env')
 
 
 def convert_to_rub(transaction: dict) -> float:
     """Конвертирует сумму транзакции в рубли."""
-    amount = transaction['amount']  # Получаем сумму транзакции
-    currency = transaction['currency']  # Получаем валюту транзакции
+    amount = transaction['amount']
+    currency = transaction['currency']
 
     if currency == 'RUB':
-        return float(amount)  # Если валюта уже в рублях, возвращаем сумму
+        return float(amount)
 
-    # Формируем URL для API, чтобы конвертировать валюту
     url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency}&amount={amount}"
     headers = {
-        "apikey": os.getenv("API_KEY")  # Получаем API ключ из переменных окружения
+        "apikey": os.getenv("API_KEY")
     }
 
-    response = requests.get(url, headers=headers)  # Запрос к API
+    response = requests.get(url, headers=headers)
 
-    if response.status_code == 200:  # Если запрос успешен
-        return float(response.json()['result'])  # Возвращаем результат конвертации
+    if response.status_code == 200:
+        return float(response.json()['result'])
     else:
-        return float(amount)  # Если API не сработал, возвращаем сумму без изменений
+        return float(amount)
