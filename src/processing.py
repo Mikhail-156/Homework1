@@ -1,6 +1,5 @@
 import re
 from collections import Counter
-
 from datetime import datetime
 
 
@@ -26,6 +25,7 @@ def search_by_string(operations_list: list[dict], search_string: str) -> list[di
             operations_found.append(operation)
 
     return operations_found
+
 
 def count_operations_by_categories(operations_list: list[dict], user_categories: list) -> dict:
     """Функция подсчета операций по заданным пользователем категориям."""
