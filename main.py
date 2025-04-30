@@ -2,7 +2,11 @@ from src.financ_transac import read_csv, read_excel
 from src.processing import sort_by_date, filter_by_state, search_by_string
 from src.utils import load_transactions
 from src.widget import get_date, mask_account_card
+import os
 
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 
 def main():
     """Общая функция по сборке всего проекта"""
@@ -15,21 +19,19 @@ def main():
                 3. Получить информацию о транзакциях из XLSX-файла
             """
         )
-        answer_1 = input("Введите число: ")
+        answer_1 = str(input("Пользователь: "))
 
         if answer_1 == "1":
             print("Для обработки выбран JSON-файл")
-            operations = load_transactions(r"C:\Users\Misha\PycharmProjects\Homework1\data\operations.json")
+            operations = os.path.join(DATA_DIR, "operations.json")
             break
         elif answer_1 == "2":
             print("Для обработки выбран CSV-файл")
-            operations = read_csv(r"C:\Users\Misha\PycharmProjects\Homework1\data\transactions.csv")
+            operations = os.path.join(DATA_DIR, "transactions.csv")
             break
         elif answer_1 == "3":
             print("Для обработки выбран Excel-файл")
-            operations = read_excel(
-                r"C:\Users\Misha\PycharmProjects\Homework1\data\transactions_excel.xlsx"
-            )
+            operations = os.path.join(DATA_DIR, "transactions_excel.xlsx")
             break
         else:
             print("\nОшибка ввода! Такого пункта не существует.\nПопробуйте ещё раз.\n ")
@@ -39,22 +41,24 @@ def main():
             """Введите статус, по которому необходимо выполнить фильтрацию.
             Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING"""
         )
-        answer_2 = input("Ваш ответ: ").upper()
+        answer_2 = input("Пользователь: ").upper().strip()
+        answer_4 = ["EXECUTED", "CANCELED", "PENDING"]
 
-        if answer_2 == "EXECUTED" or answer_2 == "CANCELED" or answer_2 == "PENDING":
+        if answer_2 in answer_4:
             filtered_operations = filter_by_state(operations, answer_2)
             print(f"Операции отфильтрованы по статусу {answer_2}")
             break
         else:
-            print(f"Статус операции {answer_2} недоступен.\nПопробуйте снова.\n ")
+            print(f"""Статус операции {answer_2} недоступен.\nВведите статус, по которому необходимо выполнить фильтрацию.\n 
+                                                            Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING.\n """)
 
     while True:
         print("Отсортировать операции по дате? Да/Нет")
-        filter1 = input("Введите 'да' или 'нет': ").lower()
+        filter1 = input().lower()
 
         if filter1 == "да":
             print("Отсортировать по возрастанию или по убыванию?")
-            filter1_1 = input("по возрастанию/по убыванию: ").lower()
+            filter1_1 = input("").lower()
             if filter1_1 == "по убыванию":
                 filtered_operations_dy_date = sort_by_date(filtered_operations, True)
                 break
@@ -143,3 +147,6 @@ def main():
                 amount = operation["amount"]
                 currency_name = operation["currency_name"]
                 print(f"Сумма: {amount} {currency_name}")
+
+if __name__ == "__main__":
+    result = main()
